@@ -27,7 +27,7 @@ function App() {
   
   return (
     <Router>
-    
+      <h1>Hello World</h1>
       <Switch>
         <Route exact path="/">
           {isLoggedIn?(<MainPage toggleIsLoggedIn={toggleIsLoggedIn} />):(<LogInForm 
