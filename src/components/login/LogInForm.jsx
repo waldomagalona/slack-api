@@ -18,7 +18,7 @@ export default function LogInForm(props){
     });
 
 
-const submitForm =async (data) =>{
+const submitForm = (data) =>{
 	
 	
     axios.post("http://206.189.91.54/api/v1/auth/sign_in",data)
@@ -26,6 +26,7 @@ const submitForm =async (data) =>{
         console.log(response)
         if(response.request.statusText === "OK"){
             props.toggleIsLoggedIn();
+			props.passResponse(response)
         }
     })
 	.catch((error)=>{

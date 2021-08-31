@@ -12,11 +12,12 @@
 import React, { useState } from 'react';
 import LogInForm from './components/login/LogInForm';
 import RegistrationForm from './components/registration/RegistrationForm';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import MainPage from './components/main/MainPage';
 import Spinner from 'react-bootstrap/Spinner';
 
 function App() {
+  const [capturedResponse, setCapturedResponse] =useState({})
   const [isLoggedIn, setIsLoggedIn]= useState(false);
   
 
@@ -24,13 +25,22 @@ function App() {
     setIsLoggedIn(!isLoggedIn)
   }
 
-  
+  function passResponse(data){
+		setCapturedResponse(data)
+	}
+
   return (
     <Router>
-      <h1>Hello World</h1>
+    
       <Switch>
         <Route exact path="/">
-          {isLoggedIn?(<MainPage toggleIsLoggedIn={toggleIsLoggedIn} />):(<LogInForm 
+          {isLoggedIn?
+          (<MainPage 
+          response = {capturedResponse}
+          toggleIsLoggedIn={toggleIsLoggedIn} />)
+          :
+          (<LogInForm 
+          passResponse={passResponse}
           toggleIsLoggedIn={toggleIsLoggedIn} />)}
         </Route>
         <Route path="/register">
