@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SenderChatBubble from './SenderChatBubble';
 
 export default function ChatBox(props){
-  const headers=props.response.headers;
+  const headers=props.headers;
     const [messages, setMesseges]= useState([])
     const[data, setData]= useState({
         receiver_id:267,
@@ -76,17 +76,7 @@ export default function ChatBox(props){
       </div>
 
       <div className="flex flex-col mt-20 mb-16">
-        {/* <div className="clearfix">
-          <div
-            className="bg-gray-300 w-3/4 mx-4 my-2 p-2 rounded-lg"
-          >this is a basic mobile chat layout, build with tailwind css</div>
-        </div> */}
-
-        {/* <div className="clearfix">
-          <div
-            className="bg-gray-300 w-3/4 mx-4 my-2 p-2 rounded-lg clearfix"
-          >It will be used for a full tutorial about building a chat app with vue, tailwind and firebase.</div>
-        </div> */}
+       
         {messages.map(message=>{
             return <SenderChatBubble message={message} />
         })}

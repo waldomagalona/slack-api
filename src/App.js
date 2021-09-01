@@ -25,9 +25,7 @@ function App() {
     setIsLoggedIn(!isLoggedIn)
   }
 
-  function passResponse(data){
-		setCapturedResponse(data)
-	}
+  
 
   return (
     <Router>
