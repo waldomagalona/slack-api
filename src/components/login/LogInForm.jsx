@@ -12,21 +12,24 @@ const schema=yup.object().shape({
 
 
 export default function LogInForm(props){
-
+	
     const {register, handleSubmit, formState:{errors}}= useForm({
         resolver: yupResolver(schema),
     });
 
 
-const submitForm =async (data) =>{
-	
+const submitForm = (data) =>{
 	
     axios.post("http://206.189.91.54/api/v1/auth/sign_in",data)
     .then((response)=>{
-        console.log(response)
-        if(response.request.statusText === "OK"){
-            props.toggleIsLoggedIn();
-        }
+		console.log(response)
+		props.saveUser(response)
+        // setUser(response.data);
+		// localStorage.setItem("user",JSON.stringify(response.data))
+        // if(user){
+        //     props.toggleIsLoggedIn();
+		// 	// props.passResponse(response)
+        // }
     })
 	.catch((error)=>{
 		console.log(error)
