@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import{ yupResolver } from '@hookform/resolvers/yup';
@@ -99,12 +99,12 @@ const submitForm = (data) =>{
 							</div>
 							<hr className="mb-6 border-t" />
 							<div className="text-center">
-								<a
+								<div
 									className="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-									href="#"
+									
 								>
 									Forgot Password?
-								</a>
+								</div>
 							</div>
 							<div className="text-center">
 								<Link to="/register"

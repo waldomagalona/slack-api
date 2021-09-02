@@ -14,6 +14,7 @@ import LogInForm from './components/login/LogInForm';
 import RegistrationForm from './components/registration/RegistrationForm';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import MainPage from './components/main/MainPage';
+import axios from 'axios';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   const [headers, setHeaders] = useState();
 
   useEffect(() => {
+    
     const loggedInUser = localStorage.getItem("user");
     const userHeader = localStorage.getItem("headers");
     if (loggedInUser) {
@@ -31,6 +33,8 @@ function App() {
     }
   }, []);
 
+  
+
   function logOut(){
     setUser();
     localStorage.clear();
@@ -39,7 +43,6 @@ function App() {
   
 
   function saveUser(response){
-    console.log(response.headers)
     setUser(response.data)
     setHeaders(response.headers)
     localStorage.setItem("user",JSON.stringify(response.data))

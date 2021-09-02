@@ -1,15 +1,29 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SenderChatBubble from './SenderChatBubble';
+
 
 export default function ChatBox(props){
   const headers=props.headers;
     const [messages, setMesseges]= useState([])
     const[data, setData]= useState({
         receiver_id:267,
-        receiver_class:"User",
-        body:""
+        receiver_class:"User"
     })
+
+    useEffect(()=>{
+      console.log(data)
+      console.log(headers)
+      axios.get("http://206.189.91.54/api/v1/messages?receiver_id=267&receiver_class=User",data,{
+        headers:headers
+      })
+      .then(response=>{
+        console.log(response)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    },[])
 
     function handleChange(event){
         const{name, value}= event.target
