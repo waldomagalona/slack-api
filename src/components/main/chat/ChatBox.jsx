@@ -11,11 +11,17 @@ export default function ChatBox(props){
         receiver_class:"User"
     })
 
-    useEffect(()=>{
-      console.log(data)
-      console.log(headers)
-      axios.get("http://206.189.91.54/api/v1/messages?receiver_id=267&receiver_class=User",data,{
-        headers:headers
+      const retrieveMessages =()=>{
+        console.log(data)
+        console.log(headers['access-token'])
+        axios.get(`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,data,
+        {
+        headers:{
+          "access-token": headers["access-token"],
+          client: headers.client,
+          expiry: headers.expiry,
+          uid: headers.uid
+        }
       })
       .then(response=>{
         console.log(response)
@@ -23,6 +29,10 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
+      }
+
+    useEffect(()=>{
+     retrieveMessages();
     },[])
 
     function handleChange(event){
