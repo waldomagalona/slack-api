@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import{ yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import Success from '../notification/Success';
 
 const schema=yup.object().shape({
     email: yup.string().email().required() ,
@@ -21,18 +22,21 @@ const submitForm =(data) =>{
     axios.post("http://206.189.91.54/api/v1/auth/",data)
     .then((response)=>{
         console.log(response)
+		
     })
 	.catch((error)=>{
-		console.log(error)
+		console.log(error.response.data.errors)
 	})
 };
     return (
         <div className="h-screen font-mono bg-gray-400">
 		
 		<div className="h-screen pt-6 container mx-auto">
-			<div className="flex justify-center items-center px-6 my-12">
-				
+			<div className="flex flex-col justify-center items-center px-6 my-12">
+			<Success />
 				<div className="w-full xl:w-3/4 lg:w-11/12 flex">
+
+			
 					
 					<div
 						className="w-full h-auto bg-gray-400 hidden lg:block lg:w-5/12 bg-cover rounded-l-lg"
