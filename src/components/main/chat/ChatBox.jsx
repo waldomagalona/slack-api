@@ -5,26 +5,25 @@ import SenderChatBubble from './SenderChatBubble';
 
 export default function ChatBox(props){
   const headers=props.headers;
-    const [messages, setMesseges]= useState([])
+    const [messages, setMesseges]= useState()
     const[data, setData]= useState({
         receiver_id:267,
-        receiver_class:"User"
+        receiver_class:"User",
+        body:""
     })
 
       const retrieveMessages =()=>{
         console.log(data)
-        console.log(headers['access-token'])
-        axios.get(`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,data,
-        {
-        headers:{
-          "access-token": headers["access-token"],
-          client: headers.client,
-          expiry: headers.expiry,
-          uid: headers.uid
-        }
+        console.log(headers)
+     
+      axios({
+        method: 'get',
+        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,
+        data: data,
+        headers: headers
       })
       .then(response=>{
-        console.log(response)
+        setMesseges(response.data.data)
       })
       .catch(error=>{
         console.log(error)
@@ -33,7 +32,7 @@ export default function ChatBox(props){
 
     useEffect(()=>{
      retrieveMessages();
-    },[])
+    },[messages])
 
     function handleChange(event){
         const{name, value}= event.target
@@ -55,18 +54,15 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
-        // setMesseges(prevValue =>{
-        //     return [...prevValue,data.body]
-        // })
-        // setData({
-        //     reciever_id: "",
-        //     receiver_class:"",
-        //     body:""
-        // })
+      setData({
+        receiver_id:267,
+        receiver_class:"User",
+        body:""
+    } )
     }
     return(
-        <div>
-    <div style={{overscrollBehavior: "none"}}>
+        <div >
+    <div className="h-screen" style={{overscrollBehavior: "none"}}>
       <div
         className="fixed w-1/2 bg-green-400 h-16 pt-2 text-white flex justify-between shadow-md"
         style={{top:"0px", overscrolBehavior: "none"}}
@@ -99,12 +95,12 @@ export default function ChatBox(props){
         </svg>
       </div>
 
-      <div className="flex flex-col mt-20 mb-16">
+      <div className="overflow-scroll h-4/5 flex flex-col mt-20 mb-16">
        
-        {messages.map(message=>{
-            return <SenderChatBubble message={message} />
+        {messages && messages.map(message=>{
+          const {body} = message;
+         return <SenderChatBubble message={body} />
         })}
-    
       </div>
     </div>
 

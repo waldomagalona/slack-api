@@ -12,7 +12,7 @@ export default function MainPage(props){
     return(
 <div>
 
-    <div className=' h-screen flex'>
+    <div className='overflow-hidden h-screen flex'>
         <div className='w-1/2 p-10 bg-gradient-to-r from-yellow-100'>
                  <h1 className="mb-16 text-2xl">SLACK API </h1>
                 <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">we're</span> <br /> chatting<br /> soon</p>
