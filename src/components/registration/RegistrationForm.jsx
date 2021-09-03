@@ -27,7 +27,7 @@ const submitForm =(data) =>{
 	})
 };
     return (
-        <div className="h-screen font-mono bg-gray-400">
+        <div id ="registration" className="h-screen font-mono bg-gray-400">
 		
 		<div className="h-screen pt-6 container mx-auto">
 			<div className="flex justify-center items-center px-6 my-12">
@@ -109,12 +109,12 @@ const submitForm =(data) =>{
 								</a>
 							</div>
 							<div className="text-center">
-								<Link to= "/"
+								<div onClick={()=>props.toggleIsRegistered()}
 									className="cursor-pointer inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
 									
 								>
 									Already have an account? Login!
-								</Link>
+								</div>
 							</div>
 						</form>
 					</div>

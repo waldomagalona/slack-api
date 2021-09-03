@@ -64,7 +64,7 @@ export default function ChatBox(props){
         <div >
     <div className="h-screen" style={{overscrollBehavior: "none"}}>
       <div
-        className="fixed w-1/2 bg-green-400 h-16 pt-2 text-white flex justify-between shadow-md"
+        className="fixed w-1/2 bg-gray-900 h-16 pt-2 text-white flex justify-between shadow-md"
         style={{top:"0px", overscrolBehavior: "none"}}
       >
         {/* <!-- back button --> */}
@@ -104,7 +104,7 @@ export default function ChatBox(props){
       </div>
     </div>
 
-    <form className="fixed w-1/2 flex justify-between bg-green-100" style={{bottom: "0px"}}>
+    <form className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
       <textarea
         value={data.body}
         name="body"

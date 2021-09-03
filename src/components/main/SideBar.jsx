@@ -47,7 +47,7 @@ export default function Sidebar(props){
                 </Link>
               </li>
               <li className="mb-6">
-                <Link to="/directMessages">
+                <Link to="/directmessages">
                   <span>
                     <svg
                       className="fill-current h-5 w-5 mx-auto text-gray-300 hover:text-green-500"

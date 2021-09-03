@@ -12,7 +12,6 @@
 import React, { useState, useEffect } from 'react';
 import LogInForm from './components/login/LogInForm';
 import RegistrationForm from './components/registration/RegistrationForm';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import MainPage from './components/main/MainPage';
 
 
@@ -20,7 +19,7 @@ import MainPage from './components/main/MainPage';
 function App() {
   const [user, setUser]= useState();
   const [headers, setHeaders] = useState();
-
+  const [isRegistered, setIsRegisted] = useState(true)
   useEffect(() => {
     
     const loggedInUser = localStorage.getItem("user");
@@ -33,7 +32,9 @@ function App() {
     }
   }, []);
 
-  
+  function toggleIsRegistered(){
+    setIsRegisted(!isRegistered)
+  }
 
   function logOut(){
     setUser();
@@ -50,25 +51,15 @@ function App() {
   
   }
 console.log(headers)
-  return (
-    <Router>
+  return (<div>
+    {(isRegistered)?((user)?(<MainPage
+      headers={headers}
+      logOut={logOut}/>):
+      (<LogInForm 
+      saveUser={saveUser}
+      toggleIsRegistered={toggleIsRegistered} />)):(<RegistrationForm toggleIsRegistered={toggleIsRegistered} />)}
+      </div>
     
-      <Switch>
-        <Route exact path="/">
-          {(user)?
-          (<MainPage
-          headers={headers}
-          logOut={logOut} />)
-          :
-          (<LogInForm 
-          saveUser={saveUser}
-          />)}
-        </Route>
-        <Route path="/register">
-          <RegistrationForm />
-        </Route>
-      </Switch>
-    </Router>
   );
 }
 
