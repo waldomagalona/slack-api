@@ -12,9 +12,9 @@
 import React, { useState, useEffect } from 'react';
 import LogInForm from './components/login/LogInForm';
 import RegistrationForm from './components/registration/RegistrationForm';
-import {HashRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import MainPage from './components/main/MainPage';
-import axios from 'axios';
+
 
 
 function App() {
