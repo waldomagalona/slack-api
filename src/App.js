@@ -15,7 +15,6 @@ import RegistrationForm from './components/registration/RegistrationForm';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import MainPage from './components/main/MainPage';
 
-
 function App() {
   const [user, setUser]= useState();
   const [headers, setHeaders] = useState();
@@ -49,22 +48,21 @@ function App() {
 console.log(headers)
   return (
     <Router>
-    
-      <Switch>
-        <Route exact path="/">
-          {(user)?
-          (<MainPage
-          headers={headers}
-          logOut={logOut} />)
-          :
-          (<LogInForm 
-          saveUser={saveUser}
-          />)}
-        </Route>
-        <Route path="/register">
-          <RegistrationForm />
-        </Route>
-      </Switch>
+        <Switch>
+          <Route exact path="/">
+            {(user)?
+            (<MainPage
+            headers={headers}
+            logOut={logOut} />)
+            :
+            (<LogInForm 
+            saveUser={saveUser}
+            />)}
+          </Route>
+          <Route path="/register">
+            <RegistrationForm />
+          </Route>
+        </Switch>
     </Router>
   );
 }

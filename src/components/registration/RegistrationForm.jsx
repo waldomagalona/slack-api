@@ -52,12 +52,12 @@ const submitForm =(data) =>{
 									Email
 								</label>
 								<input
-                                     {...register("email")} 
-                                    name="email"
+                                     {...register("name")} 
+                                    name="name"
 									className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-									id="email"
-									type="email"
-									placeholder="Email"
+									id="name"
+									type="name"
+									placeholder="Channel Name"
 								/>
                                
                                 <p>{errors.email?.message}</p>
