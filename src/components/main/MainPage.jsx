@@ -26,7 +26,7 @@ export default function MainPage(props){
                 <Route exact path ="/" >
                     <WelcomeMessage />
                 </Route>
-                <Route path ="/directMessages" >
+                <Route path ="/directmessages" >
                     <DirectMessages />
                 </Route>
                 <Route path ="/channels" >
