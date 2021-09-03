@@ -58,7 +58,9 @@ console.log(headers)
       logOut={logOut}/>):
       (<LogInForm 
       saveUser={saveUser}
-      toggleIsRegistered={toggleIsRegistered} />)):(<RegistrationForm toggleIsRegistered={toggleIsRegistered} />)}
+      toggleIsRegistered={toggleIsRegistered} />))
+      :
+      (<RegistrationForm toggleIsRegistered={toggleIsRegistered} />)}
       </div>
     
   );
