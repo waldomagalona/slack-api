@@ -19,7 +19,7 @@ export default function MainPage(props){
         <Router>
         <Sidebar logOut={props.logOut} />
 
-        <div className="p-10">
+        <div className="w-full p-10">
                  <h1 className="mb-16 text-2xl">SLACK API </h1>
 
                 <Switch>
