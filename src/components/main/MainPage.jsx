@@ -19,12 +19,12 @@ export default function MainPage(props){
         <Router>
         <Sidebar logOut={props.logOut} />
 
-        <div className="p-10">
+        <div className="p-10 w-full">
                  <h1 className="mb-16 text-2xl">SLACK API </h1>
 
                 <Switch>
                 <Route exact path ="/" >
-                    <WelcomeMessage />
+                    <WelcomeMessage headers={props.headers} />
                 </Route>
                 <Route path ="/directmessages" >
                     <DirectMessages />

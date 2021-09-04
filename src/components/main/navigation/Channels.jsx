@@ -1,5 +1,5 @@
 import React from 'react';
-import AddButton from '../../buttons/AddButton';
+import AddButton from '../../tools/AddButton';
 
 export default function Channels(){
     return(<div>
