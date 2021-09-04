@@ -13,9 +13,6 @@ export default function ChatBox(props){
     })
 
       const retrieveMessages =()=>{
-        console.log(data)
-        console.log(headers)
-     
       axios({
         method: 'get',
         url:`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,
