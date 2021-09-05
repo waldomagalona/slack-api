@@ -1,9 +1,56 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import ListContainer from '../../table/ListContainer';
 
-export default function WelcomeMessage(){
+export default function WelcomeMessage(props){
+    const [usersList, setUsersList] = useState([])
+    const [searchResult, setSearchResult] = useState([])
+    const [term, setTerm] =useState("")
+    const headers = props.headers;
+    const getUsersList =()=>{
+        axios({
+            method:'get',
+            url:'http://206.189.91.54/api/v1/users',
+            headers: headers
+        })
+        .then(response => {
+            console.log(response.data.data)
+            setUsersList(response.data.data)
+        })
+        .then(error => {
+            console.log(error)
+        })
+    }
+
+    function getTerm(searchTerm){
+        setTerm(searchTerm)
+    }
+
+    function searchHandler(searchTerm){
+        if(searchTerm !== ""){
+            const newUsersList = usersList.filter((user) => {
+                return (Object.values(user).join(" ").toLowerCase().includes(searchTerm.toLowerCase()))
+            })
+            setSearchResult(newUsersList);
+        } else {
+            setSearchResult(usersList)
+        }
+    }
+    
+    useEffect(()=> {
+        getUsersList();
+    },[])
+
+   
     return(<div>
         <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">we're</span> <br /> chatting<br /> soon</p>
-        <p className="mb-7 text-sm leading-snug text-yellow-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <ListContainer 
+        getTerm={getTerm}
+        searchHandler ={searchHandler}
+        usersList={term.length < 1? usersList: searchResult} 
+        
+        />
+        
         </div>         
     )
 }
