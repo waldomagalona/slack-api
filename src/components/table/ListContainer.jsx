@@ -19,6 +19,7 @@ export default function ListContainer(props){
         <div className="overflow-scroll overflow-x-hidden h-64">
             {(usersList.length>0)?(usersList.map(user => {
              return <Cards
+            passReceiverDetails={props.passReceiverDetails}
             email={user.email}
             id={user.id} />
             })): <div>No results found</div>}

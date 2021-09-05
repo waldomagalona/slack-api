@@ -4,19 +4,36 @@ import SenderChatBubble from './SenderChatBubble';
 
 
 export default function ChatBox(props){
+  const receiverData = props.receiverData
+  console.log(receiverData)
+  console.log("chatbox", receiverData)
   const headers=props.headers;
-    const [messages, setMesseges]= useState()
-    const[data, setData]= useState({
-        receiver_id:267,
-        receiver_class:"User",
-        body:""
-    })
+  const [messages, setMesseges]= useState()
+  const[data, setData]= useState({
+    body:""
+})
+
+  // const passData =()=>{
+  //   if(receiverData){
+  //     setData(prevValue=> {
+  //       return {...prevValue,
+  //         receiver_id:(receiverData['receiver_id']),
+  //         receiver_class:(receiverData['receiver_class']),
+  //         receiver_email:(receiverData['receiver_email']),
+  //       }
+  //     })
+  //   }
+    
+  // }
+  // if(receiverData){
+  //   passData();
+  // }
 
       const retrieveMessages =()=>{
       axios({
         method: 'get',
-        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,
-        data: data,
+        url:`http://206.189.91.54/api/v1/messages?receiver_id=${receiverData?receiverData["receiver_id"]:""}&receiver_class=${receiverData?receiverData["receiver_class"]:""}`,
+        data: receiverData,
         headers: headers
       })
       .then(response=>{
@@ -29,7 +46,9 @@ export default function ChatBox(props){
 
     useEffect(()=>{
      retrieveMessages();
-    },[messages])
+
+       console.log("data received",receiverData)
+    },[]) 
 
     function handleChange(event){
         const{name, value}= event.target
@@ -38,11 +57,13 @@ export default function ChatBox(props){
             [name]:value}
         })
     }
-
+// useEffect(()=>{
+//   passData()
+// },[])
     function handleClick(event){
       event.preventDefault();
-      console.log(data)
-      axios.post("http://206.189.91.54/api/v1/messages",data, {
+      console.log(receiverData)
+      axios.post("http://206.189.91.54/api/v1/messages",receiverData, {
         headers: headers
       })
       .then(response=>{
@@ -51,11 +72,11 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
-      setData({
-        receiver_id:267,
-        receiver_class:"User",
-        body:""
-    } )
+    //   setData({
+    //     receiver_id:267,
+    //     receiver_class:"User",
+    //     body:""
+    // } )
     }
     return(
         <div >
@@ -77,7 +98,7 @@ export default function ChatBox(props){
             />
           </svg>
         </router-link>
-        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">Avion School</div>
+        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{receiverData?receiverData['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
