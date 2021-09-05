@@ -28,12 +28,19 @@ export default function MainPage(props){
         })
     }
 
-    function passReceiverDetails(receiverDetails){
-        setReceiverData(receiverDetails)
-    }
+    // function passReceiverDetails(receiverDetails){
+    //     setReceiverData(receiverDetails)
+    // }
+
+    
 
     useEffect(()=> {
         getUsersList();
+        const haveReceiver = localStorage.getItem("receiver");
+        if(haveReceiver){
+            const foundReceiver = JSON.parse(haveReceiver);
+            setReceiverData(foundReceiver)
+        }
     },[])
 
     return(
@@ -50,7 +57,6 @@ export default function MainPage(props){
                 <Switch>
                 <Route exact path ="/" >
                     <WelcomeMessage 
-                    passReceiverDetails={passReceiverDetails}
                     usersList={usersList}
                     headers={props.headers} />
                 </Route>

@@ -1,39 +1,22 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import SenderChatBubble from './SenderChatBubble';
 
 
 export default function ChatBox(props){
-  const receiverData = props.receiverData
-  console.log(receiverData)
-  console.log("chatbox", receiverData)
+  const data = props.receiverData
+  console.log(data)
   const headers=props.headers;
   const [messages, setMesseges]= useState()
-  const[data, setData]= useState({
-    body:""
-})
+  const inputEl = useRef("")
 
-  // const passData =()=>{
-  //   if(receiverData){
-  //     setData(prevValue=> {
-  //       return {...prevValue,
-  //         receiver_id:(receiverData['receiver_id']),
-  //         receiver_class:(receiverData['receiver_class']),
-  //         receiver_email:(receiverData['receiver_email']),
-  //       }
-  //     })
-  //   }
-    
-  // }
-  // if(receiverData){
-  //   passData();
-  // }
 
       const retrieveMessages =()=>{
+        console.log(data)
       axios({
         method: 'get',
-        url:`http://206.189.91.54/api/v1/messages?receiver_id=${receiverData?receiverData["receiver_id"]:""}&receiver_class=${receiverData?receiverData["receiver_class"]:""}`,
-        data: receiverData,
+        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
+        data: data,
         headers: headers
       })
       .then(response=>{
@@ -45,25 +28,20 @@ export default function ChatBox(props){
       }
 
     useEffect(()=>{
+      console.log("ran")
      retrieveMessages();
+  
+    },[messages])  
 
-       console.log("data received",receiverData)
-    },[]) 
-
-    function handleChange(event){
-        const{name, value}= event.target
-        setData(prevValue=>{
-            return {...prevValue,
-            [name]:value}
-        })
+    function handleChange(){
+        
+        console.log(inputEl.current.value)
     }
-// useEffect(()=>{
-//   passData()
-// },[])
+
     function handleClick(event){
       event.preventDefault();
-      console.log(receiverData)
-      axios.post("http://206.189.91.54/api/v1/messages",receiverData, {
+      console.log("handle click",data)
+      axios.post("http://206.189.91.54/api/v1/messages",data, {
         headers: headers
       })
       .then(response=>{
@@ -72,11 +50,7 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
-    //   setData({
-    //     receiver_id:267,
-    //     receiver_class:"User",
-    //     body:""
-    // } )
+    
     }
     return(
         <div >
@@ -98,7 +72,7 @@ export default function ChatBox(props){
             />
           </svg>
         </router-link>
-        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{receiverData?receiverData['receiver_email']:""}</div>
+        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +98,8 @@ export default function ChatBox(props){
 
     <form className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
       <textarea
-        value={data.body}
+      ref= {inputEl}
+        value={inputEl.current.value}
         name="body"
         onChange={handleChange}
         className="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-300 bg-gray-200 resize-none"

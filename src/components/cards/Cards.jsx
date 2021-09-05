@@ -8,7 +8,8 @@ export default function Cards(props){
   }
 
   function handleClick(){
-    props.passReceiverDetails(receiverDetails)
+    localStorage.removeItem("receiver")
+    localStorage.setItem("receiver",JSON.stringify(receiverDetails))
   }
     return(
         <div className="card-content divide-y flex flex-col gap-y-3 mt-5">

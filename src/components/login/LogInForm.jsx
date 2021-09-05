@@ -24,12 +24,7 @@ const submitForm = (data) =>{
     .then((response)=>{
 		console.log(response)
 		props.saveUser(response)
-        // setUser(response.data);
-		// localStorage.setItem("user",JSON.stringify(response.data))
-        // if(user){
-        //     props.toggleIsLoggedIn();
-		// 	// props.passResponse(response)
-        // }
+       
     })
 	.catch((error)=>{
 		console.log(error)

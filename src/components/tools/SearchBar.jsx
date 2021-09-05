@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 export default function SearchBar(props){ 
-  const [searchTerm, setSearchTerm]= useState("")
   const inputEl = useRef("")
   
   // useEffect(()=>{
