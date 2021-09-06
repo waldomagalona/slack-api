@@ -1,54 +1,49 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef} from 'react';
+import MessagesContainer from './MessagesContainer';
 import SenderChatBubble from './SenderChatBubble';
-import useForceUpdate from 'use-force-update';
-
+import { useForm } from 'react-hook-form';
+import ChatTextInput from './ChatTextInput';
 
 export default function ChatBox(props){
+  // const data = props.receiverData
+
   const headers=props.headers;
-  const forceUpdate = useForceUpdate();
-    const [messages, setMesseges]= useState()
-    const[data, setData]= useState({
-        receiver_id:267,
-        receiver_class:"User",
-        body:""
-    });
+  // const [messages, setMesseges]= useState()
+  const [receiveBody, setReceiveBody] =useState({body:""})
+  const receiverData = localStorage.getItem("receiver");
+  const receiveData =JSON.parse(receiverData)
+  const [data, setData]= useState({body:""})
 
-      const retrieveMessages =()=>{
-        console.log(data)
-        console.log(headers)
-     
-      axios({
-        method: 'get',
-        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data["receiver_id"]}&receiver_class=${data["receiver_class"]}`,
-        data: data,
-        headers: headers
-      })
-      .then(response=>{
-        setMesseges([...response.data.data])
-        forceUpdate();
-        console.log(messages);
-      })
-      .catch(error=>{
-        console.log(error)
-      })
-      }
-
+  const receivedId = receiveData['receiver_id'];
     useEffect(()=>{
-     retrieveMessages();
-    },[])
+      // retrieveMessages();
+     console.log("useEffect in chatbox ran")
+      const {receiver_id, receiver_class, receiver_email }=receiveData;
+      setData(prevValue=>{
+        return {...prevValue,  
+          receiver_id: receiver_id,
+          receiver_class: receiver_class,
+          receiver_email: receiver_email}
+      })
+    },[receivedId])  
+  
 
     function handleChange(event){
-        const{name, value}= event.target
+      // setData(prevValue=>{
+      //   return{...prevValue,
+      //   body:data}
+      // })
+      const{name, value} =event.target
         setData(prevValue=>{
-            return {...prevValue,
-            [name]:value}
+          return{...prevValue,
+         [name]:value}
         })
     }
 
     function handleClick(event){
       event.preventDefault();
-      console.log(data)
+      console.log("handleclick", data)
       axios.post("http://206.189.91.54/api/v1/messages",data, {
         headers: headers
       })
@@ -58,11 +53,9 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
-      setData({
-        receiver_id:267,
-        receiver_class:"User",
-        body:""
-    } )
+    setData(prevValue=>{
+      return {...prevValue,body:""}
+    })
     }
     return(
         <div >
@@ -84,7 +77,7 @@ export default function ChatBox(props){
             />
           </svg>
         </router-link>
-        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">Avion School</div>
+        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -98,30 +91,31 @@ export default function ChatBox(props){
           />
         </svg>
       </div>
+      <MessagesContainer 
+      data={data}
+      headers={headers}
+      // messages ={messages}
 
-      <div className="overflow-scroll h-4/5 flex flex-col mt-20 mb-16">
-       
-        {messages && messages.map(message=>{
-          const {body} = message;
-         return <SenderChatBubble message={body} />
-        })}
-      </div>
+      />
+
     </div>
 
-    <form className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
-      <textarea
+    <form 
+     className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
+
+     {/* chat text input area start*/}
+     <textarea
+        onChange={handleChange}
         value={data.body}
         name="body"
-        onChange={handleChange}
         className="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-300 bg-gray-200 resize-none"
         rows="1"
         placeholder="Message..."
         style={{outline: "none"}}
       ></textarea>
-      
+       {/* chat text input area end*/}
       <button 
-      type="sumit"
-      onClick={handleClick}
+      onClick ={handleClick}
       className="m-2" style={{outline: "none"}}>
         <svg
           className="svg-inline--fa text-green-400 fa-paper-plane fa-w-16 w-12 h-12 py-2 mr-2"
