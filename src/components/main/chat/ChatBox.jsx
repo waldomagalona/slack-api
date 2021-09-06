@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SenderChatBubble from './SenderChatBubble';
+import useForceUpdate from 'use-force-update';
 
 
 export default function ChatBox(props){
   const headers=props.headers;
+  const forceUpdate = useForceUpdate();
     const [messages, setMesseges]= useState()
     const[data, setData]= useState({
         receiver_id:267,
         receiver_class:"User",
         body:""
-    })
+    });
 
       const retrieveMessages =()=>{
         console.log(data)
@@ -23,7 +25,9 @@ export default function ChatBox(props){
         headers: headers
       })
       .then(response=>{
-        setMesseges(response.data.data)
+        setMesseges([...response.data.data])
+        forceUpdate();
+        console.log(messages);
       })
       .catch(error=>{
         console.log(error)
@@ -32,7 +36,7 @@ export default function ChatBox(props){
 
     useEffect(()=>{
      retrieveMessages();
-    },[messages])
+    },[])
 
     function handleChange(event){
         const{name, value}= event.target

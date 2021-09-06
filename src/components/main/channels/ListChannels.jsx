@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 
 
@@ -15,7 +15,7 @@ export const ListChannels =(props) =>{
         headers: headers
       })
       .then(response=>{
-        setChannels(response.data.data)
+        setChannels([response.data.data])
       })
       .catch(error=>{
         console.log(error)
@@ -24,14 +24,14 @@ export const ListChannels =(props) =>{
 
     useEffect(()=>{
         retrieveChannels();
-       },[channels])
+       },[])
 
 
     return (
         <div>
             {
-            channels.map(channels => (
-                    <div>
+            channels && channels.map(channels => (
+                    <div className="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                         <div id='channels'>{channels.name}</div>
                     </div>
                 ))

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import{ yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import ListChannels from './ListChannels'
 
 const schema=yup.object().shape({
     name: yup.string().min(4).max(15).required()
@@ -23,6 +24,7 @@ const AddChannel = (props) => {
         .then(response => {
             console.log(response)
             setShowModal(false)
+            ListChannels();
         })
         .catch(error => alert("Unable to add channel. Please review inputs."))
     }

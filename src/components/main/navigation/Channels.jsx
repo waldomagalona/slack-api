@@ -7,6 +7,7 @@ export default function Channels(props){
         <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">Channels</span> <br /> here</p>
         <p className="mb-7 text-sm leading-snug text-yellow-400">TODO: List Channels here</p>
         <ListChannels headers={props.headers}/>
+        <br></br>
         <AddChannel headers = {props.headers}/>
         </div>         
     )
