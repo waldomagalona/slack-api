@@ -37,6 +37,7 @@ export default function MainPage(props){
     
 
     useEffect(()=> {
+        console.log("useeffect in main page ran")
         getUsersList();
     },[receiverData])
 

@@ -8,7 +8,7 @@ export default function SearchBar(props){
   // })
 
   function getSearchTerm(){
-    // setSearchTerm(inputEl);
+    
     props.getTerm(inputEl.current.value)
    props.searchHandler(inputEl.current.value)
   }
