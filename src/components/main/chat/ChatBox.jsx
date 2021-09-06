@@ -15,17 +15,20 @@ export default function ChatBox(props){
   const receiveData =JSON.parse(receiverData)
   const [data, setData]= useState({body:""})
     
-   const receivedId =receiveData['receiver_id']
+   const receivedId =receiveData?receiveData['receiver_id']:""
     useEffect(()=>{
       // retrieveMessages();
-     console.log("useEffect in chatbox ran")
-      const {receiver_id, receiver_class, receiver_email }=receiveData;
-      setData(prevValue=>{
-        return {...prevValue,  
-          receiver_id: receiver_id,
-          receiver_class: receiver_class,
-          receiver_email: receiver_email}
-      })
+      if(receiveData){
+        console.log("useEffect in chatbox ran")
+        const {receiver_id, receiver_class, receiver_email }=receiveData;
+        setData(prevValue=>{
+          return {...prevValue,  
+            receiver_id: receiver_id,
+            receiver_class: receiver_class,
+            receiver_email: receiver_email}
+        })
+      }
+     
     },[receivedId])  
 
 
