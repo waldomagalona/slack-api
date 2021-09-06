@@ -1,6 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 export default function Cards(props){
+  const receiverDetails ={
+    receiver_id:props.id,
+    receiver_class:"User",
+    receiver_email:props.email,
+  }
+
+  function handleClick(){
+    localStorage.removeItem("receiver");
+    localStorage.setItem("receiver",JSON.stringify(receiverDetails));
+    
+    props.passReceiverDetails()
+  }
+ useEffect(()=>{
+ },[receiverDetails])
     return(
         <div className="card-content divide-y flex flex-col gap-y-3 mt-5">
         
@@ -18,9 +32,11 @@ export default function Cards(props){
                 </div>
         
                 <div className="card-action">
-                  <button className="flex items-center px-2 py-1 text-xs text-white bg-gray-500 hover:bg-gray-600">
-                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
-                    <span className="">Invite</span>
+                  <button
+                  onClick={handleClick}
+                   className="flex items-center px-2 py-1 text-xs text-white bg-green-400 hover:bg-green-600">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                    <span className="">Send Message</span>
                   </button>
                 </div>
               </div>

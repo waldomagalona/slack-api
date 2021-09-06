@@ -1,5 +1,5 @@
-
-import React from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import ChatBox from './chat/ChatBox';
 import Sidebar from './SideBar';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
@@ -9,7 +9,37 @@ import Channels from './navigation/Channels';
 
 export default function MainPage(props){
     // console.log(props)
+    const [receiverData, setReceiverData]= useState()
+    const headers = props.headers
+    const [usersList, setUsersList] = useState([])
+
+    const getUsersList =()=>{
+        axios({
+            method:'get',
+            url:'http://206.189.91.54/api/v1/users',
+            headers: headers
+        })
+        .then(response => {
+            console.log(response.data.data)
+            setUsersList(response.data.data)
+        })
+        .then(error => {
+            console.log(error)
+        })
+    }
+
+    function passReceiverDetails(receiverDetails){
+    const rData = localStorage.getItem("receiver");
+    const data =JSON.parse(rData)
+        setReceiverData(data)
+    }
+
     
+
+    useEffect(()=> {
+        console.log("useeffect in main page ran")
+        getUsersList();
+    },[receiverData])
 
     return(
         
@@ -24,7 +54,10 @@ export default function MainPage(props){
 
                 <Switch>
                 <Route exact path ="/" >
-                    <WelcomeMessage headers={props.headers} />
+                    <WelcomeMessage
+                    passReceiverDetails={passReceiverDetails}
+                    usersList={usersList}
+                    headers={props.headers} />
                 </Route>
                 <Route path ="/directmessages" >
                     <DirectMessages />
@@ -37,7 +70,9 @@ export default function MainPage(props){
 </Router>
         </div>
         <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80')`}}>
-            <ChatBox headers={props.headers}/>
+            <ChatBox 
+            receiverData ={receiverData}
+            headers={props.headers}/>
         </div>
     </div>
 </div>
