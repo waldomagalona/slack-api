@@ -10,15 +10,15 @@ export default function ChatBox(props){
 
   const headers=props.headers;
   // const [messages, setMesseges]= useState()
-  const inputEl = useRef("")
+  const [receiveBody, setReceiveBody] =useState({body:""})
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
   const [data, setData]= useState({body:""})
-   const{register, handleSubmit}= useForm({})   
-
+    
+   const receivedId =receiveData['receiver_id']
     useEffect(()=>{
       // retrieveMessages();
-      console.log("useeffect in chat box ran")
+     console.log("useEffect in chatbox ran")
       const {receiver_id, receiver_class, receiver_email }=receiveData;
       setData(prevValue=>{
         return {...prevValue,  
@@ -26,29 +26,24 @@ export default function ChatBox(props){
           receiver_class: receiver_class,
           receiver_email: receiver_email}
       })
-    },[receiverData])  
+    },[receivedId])  
 
 
-    // function handleChange(data){
-    //   setData(prevValue=>{
-    //     return{...prevValue,
-    //     body:data}
-    //   })
-    //   // const{name, value} =event.target
-    //   // const bodyValue=inputEl.current.value
-    //   //   setData(prevValue=>{
-    //   //     return{...prevValue,
-    //   //     body:bodyValue}
-    //   //   })
-    //   console.log("chatbox",data)
-    // }
+    function handleChange(event){
+      // setData(prevValue=>{
+      //   return{...prevValue,
+      //   body:data}
+      // })
+      const{name, value} =event.target
+        setData(prevValue=>{
+          return{...prevValue,
+         [name]:value}
+        })
+    }
 
-    function handleClick(sendData){
-      console.log(sendData)
-     setData(prevValue=>{
-       return{...prevValue, sendData}
-     })
-      console.log("handle click",data)
+    function handleClick(event){
+      event.preventDefault();
+      console.log("handleclick", data)
       axios.post("http://206.189.91.54/api/v1/messages",data, {
         headers: headers
       })
@@ -59,7 +54,7 @@ export default function ChatBox(props){
         console.log(error)
       })
     setData(prevValue=>{
-      return{...prevValue, body:""}
+      return {...prevValue,body:""}
     })
     }
     return(
@@ -106,13 +101,21 @@ export default function ChatBox(props){
     </div>
 
     <form 
-    onSubmit={handleSubmit(handleClick)}
      className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
 
      {/* chat text input area start*/}
-      <ChatTextInput />
+     <textarea
+        onChange={handleChange}
+        value={data.body}
+        name="body"
+        className="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-300 bg-gray-200 resize-none"
+        rows="1"
+        placeholder="Message..."
+        style={{outline: "none"}}
+      ></textarea>
        {/* chat text input area end*/}
       <button 
+      onClick ={handleClick}
       className="m-2" style={{outline: "none"}}>
         <svg
           className="svg-inline--fa text-green-400 fa-paper-plane fa-w-16 w-12 h-12 py-2 mr-2"

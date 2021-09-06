@@ -1,7 +1,7 @@
 import React,{useRef} from "react";
 
 export default function ChatTextInput(){
-
+    
     const inputEl = useRef("")
 
     function handleChange(){

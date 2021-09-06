@@ -15,6 +15,20 @@ export default function MessagesContainer(props){
     const mapMessages=()=>{
         setMessages(receiveMessages)
     }
+    const hydrate=()=>{
+      axios({
+        method: 'get',
+        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
+        data: data,
+        headers: headers
+      })
+      .then(response=>{
+        setMessages(response.data.data)
+      })
+      .catch(error=>{
+        console.log(error)
+      })
+    }
     const retrieveMessages =()=>{
         axios({
           method: 'get',
@@ -31,10 +45,14 @@ export default function MessagesContainer(props){
         }
 
     useEffect(()=>{
+     hydrate()
+    },[messages])
+    
+    useEffect(()=>{
     console.log("useeffect in messages conatiainer ran")
     mapMessages() 
     retrieveMessages()
-    },[receiverEmail, messageBody])
+    },[receiverEmail])
 
     return(
         <MapMessage 
