@@ -8,7 +8,7 @@ import DirectMessages from './navigation/DirectMessages';
 import Channels from './navigation/Channels';
 
 export default function MainPage(props){
-    // console.log(props)
+    console.log(props.user.data.id)
     const [receiverData, setReceiverData]= useState()
     const headers = props.headers
     const [usersList, setUsersList] = useState([])
