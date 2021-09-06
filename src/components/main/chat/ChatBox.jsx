@@ -1,18 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react';
+import MessagesContainer from './MessagesContainer';
 import SenderChatBubble from './SenderChatBubble';
 
 
 export default function ChatBox(props){
-  const data = props.receiverData
-  console.log(data)
+  // const data = props.receiverData
+
   const headers=props.headers;
   const [messages, setMesseges]= useState()
   const inputEl = useRef("")
-
-
+  const receiverData = localStorage.getItem("receiver");
+  const receiveData =JSON.parse(receiverData)
+  const [data, setData]= useState({body:""})
       const retrieveMessages =()=>{
-        console.log(data)
       axios({
         method: 'get',
         url:`http://206.189.91.54/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
@@ -28,14 +29,24 @@ export default function ChatBox(props){
       }
 
     useEffect(()=>{
-      console.log("ran")
-     retrieveMessages();
+      retrieveMessages();
+      const {receiver_id, receiver_class, receiver_email }=receiveData;
+      setData(prevValue=>{
+        return {...prevValue,  
+          receiver_id: receiver_id,
+          receiver_class: receiver_class,
+          receiver_email: receiver_email}
+      })
+     
   
-    },[messages])  
+    },[])  
 
-    function handleChange(){
-        
-        console.log(inputEl.current.value)
+    function handleChange(event){
+      const{name, value} =event.target
+        setData(prevValue=>{
+          return{...prevValue,
+          [name]:value}
+        })
     }
 
     function handleClick(event){
@@ -50,7 +61,9 @@ export default function ChatBox(props){
       .catch(error=>{
         console.log(error)
       })
-    
+    setData(prevValue=>{
+      return{...prevValue, body:""}
+    })
     }
     return(
         <div >
@@ -86,20 +99,23 @@ export default function ChatBox(props){
           />
         </svg>
       </div>
-
-      <div className="overflow-scroll h-4/5 flex flex-col mt-20 mb-16">
+      <MessagesContainer messages ={messages}/>
+{/* messages container start */}
+      {/* <div className="overflow-scroll h-4/5 flex flex-col mt-20 mb-16"> */}
        
-        {messages && messages.map(message=>{
+        {/* {messages && messages.map(message=>{
           const {body} = message;
          return <SenderChatBubble message={body} />
-        })}
-      </div>
+        })} */}
+      {/* </div> */}
+
+      {/* messages container end */}
     </div>
 
     <form className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
       <textarea
-      ref= {inputEl}
-        value={inputEl.current.value}
+       
+        value={data.body}
         name="body"
         onChange={handleChange}
         className="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-300 bg-gray-200 resize-none"

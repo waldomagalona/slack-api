@@ -28,20 +28,17 @@ export default function MainPage(props){
         })
     }
 
-    // function passReceiverDetails(receiverDetails){
-    //     setReceiverData(receiverDetails)
-    // }
+    function passReceiverDetails(receiverDetails){
+    const rData = localStorage.getItem("receiver");
+    const data =JSON.parse(rData)
+        setReceiverData(data)
+    }
 
     
 
     useEffect(()=> {
         getUsersList();
-        const haveReceiver = localStorage.getItem("receiver");
-        if(haveReceiver){
-            const foundReceiver = JSON.parse(haveReceiver);
-            setReceiverData(foundReceiver)
-        }
-    },[])
+    },[receiverData])
 
     return(
         
@@ -56,7 +53,8 @@ export default function MainPage(props){
 
                 <Switch>
                 <Route exact path ="/" >
-                    <WelcomeMessage 
+                    <WelcomeMessage
+                    passReceiverDetails={passReceiverDetails}
                     usersList={usersList}
                     headers={props.headers} />
                 </Route>
@@ -71,7 +69,6 @@ export default function MainPage(props){
 </Router>
         </div>
         <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80')`}}>
-{console.log(receiverData)}
             <ChatBox 
             receiverData ={receiverData}
             headers={props.headers}/>

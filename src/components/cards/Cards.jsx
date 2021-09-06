@@ -1,16 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 export default function Cards(props){
   const receiverDetails ={
     receiver_id:props.id,
     receiver_class:"User",
-    receiver_email:props.email
+    receiver_email:props.email,
   }
 
   function handleClick(){
-    localStorage.removeItem("receiver")
-    localStorage.setItem("receiver",JSON.stringify(receiverDetails))
+    localStorage.removeItem("receiver");
+    localStorage.setItem("receiver",JSON.stringify(receiverDetails));
+    
+    props.passReceiverDetails()
   }
+ useEffect(()=>{
+ },[receiverDetails])
     return(
         <div className="card-content divide-y flex flex-col gap-y-3 mt-5">
         
