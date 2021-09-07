@@ -4,7 +4,6 @@ import SearchBar from '../tools/SearchBar';
 
 export default function ChannelListContainer(props){
     const channelList = props.channelList;
-    console.log("clc", channelList)
     return(
         <div className=" h-20 pb-4">
         {/* <!-- card --> */}

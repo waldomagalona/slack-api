@@ -26,11 +26,11 @@ export default function Channels(props){
     return(<div>
         <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">Channels</span> <br /> here</p>
         <NewChannelModal />
-        <ChannelListContainer
+        {(props.channelList)?(<ChannelListContainer
         passReceiverDetails={props.passReceiverDetails}
         channelList={term.length < 1? props.channelList: searchResult}
         getTerm={getTerm}
-        searchHandler ={searchHandler} />
+        searchHandler ={searchHandler} />):<div>No Channels available</div>}
         </div>         
     )
 }
