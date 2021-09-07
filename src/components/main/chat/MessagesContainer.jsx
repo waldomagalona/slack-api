@@ -49,7 +49,6 @@ export default function MessagesContainer(props){
     },[messages])
     
     useEffect(()=>{
-    console.log("useeffect in messages conatiainer ran")
     mapMessages() 
     retrieveMessages()
     },[receiverEmail])

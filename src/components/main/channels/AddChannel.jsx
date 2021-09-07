@@ -1,9 +1,10 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import{ yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import ListChannels from './ListChannels'
+//import Select from 'react-select';
+import Multiselect from 'multiselect-react-dropdown';
 
 const schema=yup.object().shape({
     name: yup.string().min(4).max(15).required()
@@ -11,24 +12,54 @@ const schema=yup.object().shape({
 
 const AddChannel = (props) => {
     const headers=props.headers;
+    const usersList = props.usersList;
+    const [addedName, setAddedName] = useState([]);
+    let addedId = [];
+    let userIdNumbers =[];
+    
     const [showModal, setShowModal] = useState(false);
     const {register, handleSubmit, formState:{errors}}= useForm({
         resolver: yupResolver(schema),
     });
-    
 
     const addChannelHander = (data) => {
-        axios.post('http://206.189.91.54//api/v1/channels', data, {
+          userIdNumbers = [].concat.apply([],addedId);
+          axios({
+            method: 'post',
+            url: 'http://206.189.91.54//api/v1/channels',
+            data: {
+              'name': data.name, 
+              'user_ids': userIdNumbers},
             headers: headers
           })
         .then(response => {
             console.log(response)
             setShowModal(false)
-            ListChannels();
         })
         .catch(error => alert("Unable to add channel. Please review inputs."))
     }
     
+    const onSelect = (data) =>
+    {
+      console.log(data)
+      setAddedName(data);
+      addedId = addedName.map(d => ([
+        d.id
+      ]));
+      console.log(addedId)
+    }
+    const onRemove = (data) =>
+    {
+      console.log(data)
+      setAddedName(data);
+      addedId = addedName.map(d => ([
+        d.id
+      ]));
+      console.log(addedId)
+
+    }
+
+
     return (
         <div>
             <button onClick={() => setShowModal(true)} className="p-0 w-12 h-12 bg-green-400 rounded-full hover:bg-green-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
@@ -61,7 +92,7 @@ const AddChannel = (props) => {
                   </button>
                 </div>
                 {/*body*/}
-                <form onSubmit={handleSubmit(addChannelHander)}>
+                <form onSubmit={handleSubmit(addChannelHander)}> 
                 <div className="relative p-6 flex-auto">
                   <label>
                       Channel Name:
@@ -73,7 +104,13 @@ const AddChannel = (props) => {
                     id="name"
                     type="name"
                     placeholder="Channel name"
-				    />
+				          />
+                  <Multiselect
+                    options={usersList} // Options to display in the dropdown
+                    onSelect={onSelect} // Function will trigger on select event
+                    onRemove={onRemove} // Function will trigger on remove event
+                    displayValue="email" // Property name to display in the dropdown options
+                  />
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

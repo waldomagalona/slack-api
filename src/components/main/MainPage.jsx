@@ -20,7 +20,6 @@ export default function MainPage(props){
             headers: headers
         })
         .then(response => {
-            console.log(response.data.data)
             setUsersList(response.data.data)
         })
         .then(error => {
@@ -62,7 +61,7 @@ export default function MainPage(props){
                     <DirectMessages />
                 </Route>
                 <Route path ="/channels" >
-                    <Channels headers={props.headers}/>
+                    <Channels usersList={usersList} headers={props.headers}/>
                 </Route>
                 </Switch>
                 </div>
