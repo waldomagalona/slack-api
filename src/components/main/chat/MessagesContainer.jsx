@@ -55,6 +55,8 @@ export default function MessagesContainer(props){
 
     return(
         <MapMessage 
+        data={data}
+        headers ={headers}
         messages={messages} />
     )
 }

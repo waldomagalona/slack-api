@@ -51,9 +51,9 @@ function App() {
     localStorage.setItem("headers",JSON.stringify(response.headers))
   
   }
-console.log(headers)
   return (<div>
     {(isRegistered)?((user)?(<MainPage
+      user ={user}
       headers={headers}
       logOut={logOut}/>):
       (<LogInForm 
