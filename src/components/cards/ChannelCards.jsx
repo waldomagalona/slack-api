@@ -1,6 +1,21 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 export default function ChannelCards(props){
+
+    const receiverDetails ={
+        receiver_id:props.channelId,
+        receiver_class:"Channel",
+        receiver_email:props.channelName
+      }
+    
+      function handleClick(){
+        localStorage.removeItem("receiver");
+        localStorage.setItem("receiver",JSON.stringify(receiverDetails));
+        
+        props.passReceiverDetails()
+      }
+     useEffect(()=>{
+     },[receiverDetails])
     
     return(
         <div className="card-content divide-y flex flex-col gap-y-3 mt-5">
@@ -21,7 +36,7 @@ export default function ChannelCards(props){
         
                 <div className="card-action">
                   <button
-                  
+                  onClick={handleClick}
                    className="flex items-center px-2 py-1 text-xs text-white bg-green-400 hover:bg-green-600">
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
                     <span className="">Send Message</span>

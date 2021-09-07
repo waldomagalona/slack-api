@@ -80,6 +80,7 @@ export default function MainPage(props){
                 <Route path ="/channels" >
                
                     <Channels
+                     passReceiverDetails={passReceiverDetails}
                     channelList={channelList}
                     headers={props.headers} />
                 </Route>

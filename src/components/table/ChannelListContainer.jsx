@@ -22,6 +22,7 @@ export default function ChannelListContainer(props){
           {channelList.map(channel=>{
               {/* console.log(channel) */}
               return <ChannelCards
+              passReceiverDetails={props.passReceiverDetails}
               id={channel.id}
               channelName={channel.name}
               channelId={channel.id}
