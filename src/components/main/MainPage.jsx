@@ -8,12 +8,12 @@ import DirectMessages from './navigation/DirectMessages';
 import Channels from './navigation/Channels';
 
 export default function MainPage(props){
-    console.log(props.user.data.id)
     const [receiverData, setReceiverData]= useState()
     const headers = props.headers
-    // console.log(headers.uid)
     const [usersList, setUsersList] = useState([])
+    const [channelList, setChannelList] = useState([])
 
+    // for User
     const getUsersList =()=>{
         axios({
             method:'get',
@@ -34,12 +34,26 @@ export default function MainPage(props){
     const data =JSON.parse(rData)
         setReceiverData(data)
     }
-
-    
+// ================================
+    const retrieveInvitedChannels =()=> {
+        axios({
+            method:'get',
+            url:'http://206.189.91.54/api/v1/channels',
+            headers: headers
+        })
+        .then(response =>{
+            console.log("Channels where was invited", response.data.data)
+            setChannelList(response.data.data)
+        })
+        .catch(error=>{
+            console.log("Channels where was invited",error)
+        })
+    }
 
     useEffect(()=> {
         console.log("useeffect in main page ran")
         getUsersList();
+        retrieveInvitedChannels();
     },[receiverData])
 
     return(
@@ -64,7 +78,10 @@ export default function MainPage(props){
                     <DirectMessages />
                 </Route>
                 <Route path ="/channels" >
-                    <Channels />
+               
+                    <Channels
+                    channelList={channelList}
+                    headers={props.headers} />
                 </Route>
                 </Switch>
                 </div>
