@@ -17,18 +17,17 @@ export default function ChannelListContainer(props){
             </div>
             {/* <!-- end header --> */}
         <div className="overflow-scroll overflow-x-hidden h-64">
-          
-            
-          {channelList.map(channel=>{
-              {/* console.log(channel) */}
-              return <ChannelCards
+        {(channelList.length>0)?(channelList.map(channel => {
+             return <ChannelCards
               passReceiverDetails={props.passReceiverDetails}
               id={channel.id}
               channelName={channel.name}
               channelId={channel.id}
               updatedAt={channel['updated_at']}
               ownerId= {channel['owner_id']} />
-          })}
+            })): <div>No results found</div>}
+            
+        
             </div>
           </div>
         
