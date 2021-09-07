@@ -6,10 +6,10 @@ import { useForm } from 'react-hook-form';
 import ChatTextInput from './ChatTextInput';
 
 export default function ChatBox(props){
-  // const data = props.receiverData
+  
 
   const headers=props.headers;
-  // const [messages, setMesseges]= useState()
+ 
   const [receiveBody, setReceiveBody] =useState({body:""})
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
@@ -17,7 +17,7 @@ export default function ChatBox(props){
     
    const receivedId =receiveData?receiveData['receiver_id']:""
     useEffect(()=>{
-      // retrieveMessages();
+      
       if(receiveData){
         console.log("useEffect in chatbox ran")
         const {receiver_id, receiver_class, receiver_email }=receiveData;
@@ -33,10 +33,7 @@ export default function ChatBox(props){
 
 
     function handleChange(event){
-      // setData(prevValue=>{
-      //   return{...prevValue,
-      //   body:data}
-      // })
+      
       const{name, value} =event.target
         setData(prevValue=>{
           return{...prevValue,
@@ -97,8 +94,6 @@ export default function ChatBox(props){
       <MessagesContainer 
       data={data}
       headers={headers}
-      // messages ={messages}
-
       />
 
     </div>
