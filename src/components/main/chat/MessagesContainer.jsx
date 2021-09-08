@@ -46,15 +46,17 @@ export default function MessagesContainer(props){
 
     useEffect(()=>{
      hydrate()
-    },[messages])
+    },[])
     
     useEffect(()=>{
     mapMessages() 
     retrieveMessages()
-    },[receiverEmail])
+    },[])
 
     return(
         <MapMessage 
+        data={data}
+        headers ={headers}
         messages={messages} />
     )
 }
