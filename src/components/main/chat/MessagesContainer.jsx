@@ -9,13 +9,10 @@ export default function MessagesContainer(props){
     const receiverEmail = data['receiver_email']
     const messageBody= data['body']
     const headers= props.headers
-    const receiveMessages =props.messages;
     const [messages, setMessages]=useState([])
-    console.log("counter",props.counter)
-    const count = props.counter;
-    const mapMessages=()=>{
-        setMessages(receiveMessages)
-    }
+   const counter= messages && messages.length
+   console.log("counter", counter)
+
     const hydrate=()=>{
       axios({
         method: 'get',
@@ -38,7 +35,10 @@ export default function MessagesContainer(props){
           headers: headers
         })
         .then(response=>{
+         if((response.data.data.length) !== (messages && messages.length)){
           setMessages(response.data.data)
+         }
+          
         })
         .catch(error=>{
           console.log(error)
@@ -47,12 +47,13 @@ export default function MessagesContainer(props){
 
     useEffect(()=>{
      hydrate()
-    },[count])
+    },[])
     
+
     useEffect(()=>{
-    mapMessages() 
-    retrieveMessages()
-    },[receiverEmail])
+      retrieveMessages()
+     
+    })
 
     return(
         <MapMessage 
