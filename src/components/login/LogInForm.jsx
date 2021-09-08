@@ -1,26 +1,18 @@
-import React ,{useState} from 'react';
+import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import{ yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
-import Modal from "@material-tailwind/react/Modal";
-import ModalHeader from "@material-tailwind/react/ModalHeader";
-import ModalBody from "@material-tailwind/react/ModalBody";
-import ModalFooter from "@material-tailwind/react/ModalFooter";
-import Button from "@material-tailwind/react/Button";
-import { AccordionButton } from 'react-bootstrap';
-
 
 const schema=yup.object().shape({
     email: yup.string().email().required() ,
-    password: yup.string().min(6).max(15).required()
+    password: yup.string().min(4).max(15).required()
 })
 
 
 export default function LogInForm(props){
-	const [showModal, setShowModal] =useState(false);
-	const [notif, setNotif]= useState([])
+	
     const {register, handleSubmit, formState:{errors}}= useForm({
         resolver: yupResolver(schema),
     });
@@ -35,9 +27,7 @@ const submitForm = (data) =>{
        
     })
 	.catch((error)=>{
-		console.log(error.response.data)
-		setShowModal(true);
-		setNotif(error.response.data.errors)
+		console.log(error)
 	})
 
 };
@@ -101,24 +91,6 @@ const submitForm = (data) =>{
 								>
 									Log In
 								</button>
-
-								<>
-
-<Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
-	<div onClick={() => setShowModal(false)}>
-		Attention!
-	</div>
-	<ModalBody>
-		{notif && notif.map(notif=>{
-			return <p>{notif}</p>
-		})}
-	</ModalBody>
-	
-</Modal>
-</>
-
-
-								
 							</div>
 							<hr className="mb-6 border-t" />
 							<div className="text-center">
