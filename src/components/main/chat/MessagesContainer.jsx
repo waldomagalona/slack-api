@@ -11,7 +11,8 @@ export default function MessagesContainer(props){
     const headers= props.headers
     const receiveMessages =props.messages;
     const [messages, setMessages]=useState([])
-    
+    console.log("counter",props.counter)
+    const count = props.counter;
     const mapMessages=()=>{
         setMessages(receiveMessages)
     }
@@ -46,7 +47,7 @@ export default function MessagesContainer(props){
 
     useEffect(()=>{
      hydrate()
-    },[messages])
+    },[count])
     
     useEffect(()=>{
     mapMessages() 
