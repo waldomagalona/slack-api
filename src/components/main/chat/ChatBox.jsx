@@ -30,7 +30,7 @@ export default function ChatBox(props){
         })
       }
      
-    },[])  
+    },[receivedId])  
   
 
     function handleChange(event){
