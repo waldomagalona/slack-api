@@ -14,7 +14,7 @@ export default function ChatBox(props){
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
   const [data, setData]= useState({body:""})
-  const [counter, setCounter]=useState(1)
+  
     
    const receivedId =receiveData?receiveData['receiver_id']:""
     useEffect(()=>{
@@ -50,7 +50,7 @@ export default function ChatBox(props){
       })
       .then(response=>{
         console.log(response)
-        setCounter(counter + 1)
+        
       })
       .catch(error=>{
         console.log(error)
@@ -94,7 +94,7 @@ export default function ChatBox(props){
         </svg>
       </div>
       <MessagesContainer 
-      counter={counter}
+     
       data={data}
       headers={headers}
       />

@@ -5,13 +5,10 @@ import MapMessage from './MapMessage';
 
 export default function MessagesContainer(props){
     const data =props.data
-    
-    const receiverEmail = data['receiver_email']
-    const messageBody= data['body']
     const headers= props.headers
     const [messages, setMessages]=useState([])
-   const counter= messages && messages.length
-   console.log("counter", counter)
+  
+  
 
     const hydrate=()=>{
       axios({
