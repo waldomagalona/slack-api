@@ -82,7 +82,7 @@ const retrieveInvitedChannels =()=> {
 
     useEffect(()=>{
         hydrate()
-    },[channelList])
+    },[])
 
     return(
         
