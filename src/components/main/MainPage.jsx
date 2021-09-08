@@ -8,12 +8,50 @@ import DirectMessages from './navigation/DirectMessages';
 import Channels from './navigation/Channels';
 
 export default function MainPage(props){
-    console.log(props.user.data.id)
     const [receiverData, setReceiverData]= useState()
     const headers = props.headers
-    // console.log(headers.uid)
     const [usersList, setUsersList] = useState([])
+    const [channelList, setChannelList] = useState([])
+   
+    const hydrate =()=> {
+        axios({
+            method:'get',
+            url:'http://206.189.91.54/api/v1/channels',
+            headers: headers
+        })
+        .then(response =>{
+            if(response.data.errors){
+                setChannelList(null)
+            }else{
+                setChannelList(response.data.data)
+            }
+           
+        })
+        .catch(error=>{
+            console.log("Channels where was invited",error)
+        })
+    }
+// ================================
 
+const retrieveInvitedChannels =()=> {
+    axios({
+        method:'get',
+        url:'http://206.189.91.54/api/v1/channels',
+        headers: headers
+    })
+    .then(response =>{
+        if(response.data.errors){
+            setChannelList(null)
+        }else{
+            setChannelList(response.data.data)
+        }
+       
+    })
+    .catch(error=>{
+        console.log("Channels where was invited",error)
+    })
+}
+    // for User
     const getUsersList =()=>{
         axios({
             method:'get',
@@ -35,12 +73,17 @@ export default function MainPage(props){
         setReceiverData(data)
     }
 
-    
 
     useEffect(()=> {
         console.log("useeffect in main page ran")
+        retrieveInvitedChannels();
         getUsersList();
+        console.log(headers)
     },[receiverData])
+
+    useEffect(()=>{
+        hydrate()
+    },[])
 
     return(
         
@@ -64,7 +107,11 @@ export default function MainPage(props){
                     <DirectMessages />
                 </Route>
                 <Route path ="/channels" >
-                    <Channels />
+             
+                    <Channels
+                     passReceiverDetails={passReceiverDetails}
+                    channelList={channelList}
+                    headers={props.headers} />
                 </Route>
                 </Switch>
                 </div>

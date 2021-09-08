@@ -3,25 +3,11 @@ import React, { useEffect, useState } from 'react';
 import ListContainer from '../../table/ListContainer';
 
 export default function WelcomeMessage(props){
-    // const [usersList, setUsersList] = useState([])
+   
     const [searchResult, setSearchResult] = useState([])
     const [term, setTerm] =useState("")
-    const headers = props.headers;
-    // const getUsersList =()=>{
-    //     axios({
-    //         method:'get',
-    //         url:'http://206.189.91.54/api/v1/users',
-    //         headers: headers
-    //     })
-    //     .then(response => {
-    //         console.log(response.data.data)
-    //         setUsersList(response.data.data)
-    //     })
-    //     .then(error => {
-    //         console.log(error)
-    //     })
-    // }
 
+   
     function getTerm(searchTerm){
         setTerm(searchTerm)
     }
@@ -37,9 +23,7 @@ export default function WelcomeMessage(props){
         }
     }
     
-    // useEffect(()=> {
-    //     getUsersList();
-    // },[])
+
 
    
     return(<div>
