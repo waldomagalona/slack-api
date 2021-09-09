@@ -10,7 +10,7 @@ export default function ChatBox(props){
   
 
   const headers=props.headers;
- 
+  const [counter, setCounter]=useState(1)
   const [receiveBody, setReceiveBody] =useState({body:""})
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
@@ -51,6 +51,7 @@ export default function ChatBox(props){
       })
       .then(response=>{
         console.log(response)
+        setCounter(counter + 1)
         
       })
       .catch(error=>{
@@ -82,7 +83,10 @@ export default function ChatBox(props){
         </router-link>
         <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
-        <DropdownMenu />
+        <DropdownMenu 
+         usersList={props.usersList}
+        headers ={headers}
+        receiveData={receiveData} />
         {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -96,7 +100,7 @@ export default function ChatBox(props){
         </svg> */}
       </div>
       <MessagesContainer 
-     
+     counter={counter}
       data={data}
       headers={headers}
       />
