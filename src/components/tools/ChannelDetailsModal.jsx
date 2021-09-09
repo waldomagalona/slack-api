@@ -25,6 +25,7 @@ export default function ChannelDetailsModal(props) {
     function handleClick(event){
         event.preventDefault();
         setShowModal(true)
+        props.toggleOption()
 
         axios({
             method:'get',
@@ -62,15 +63,15 @@ export default function ChannelDetailsModal(props) {
     console.log("mem",members)
     return (
         <>
-           
-            <div
+           {(receiveData["receiver_class"]==="Channel")&&<div
             onClick={handleClick}
             className={`${display} right-0 w-48 py-2 mt-2 bg-white bg-gray-100 rounded-md shadow-xl`}>
         <div  className="block px-4 py-2 text-sm text-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white">
             Channel Details
         </div>
         
-    </div>
+    </div>}
+           
             <Modal size="sm" active={showModal} toggler={() => setShowModal(false)}>
                 <ModalHeader toggler={() => setShowModal(false)}>
                    {channelDetails.channelName}

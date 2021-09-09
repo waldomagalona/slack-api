@@ -10,6 +10,7 @@ export default function DropdownMenu(props){
     function toggleOption(){
         setOption(!option);
     }
+    // console.log(receiveData)
 return(
     <div className="relative">
     <div onClick={toggleOption}>
@@ -27,6 +28,7 @@ return(
 </div>
    
     <ChannelDetailsModal 
+    toggleOption={toggleOption}
      usersList={props.usersList}
     headers ={props.headers}
     receiveData={receiveData}
