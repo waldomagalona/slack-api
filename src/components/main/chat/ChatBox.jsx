@@ -4,6 +4,7 @@ import MessagesContainer from './MessagesContainer';
 import SenderChatBubble from './SenderChatBubble';
 import { useForm } from 'react-hook-form';
 import ChatTextInput from './ChatTextInput';
+import DropdownMenu from '../../tools/DropdownMenu';
 
 export default function ChatBox(props){
   
@@ -81,7 +82,8 @@ export default function ChatBox(props){
         </router-link>
         <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
-        <svg
+        <DropdownMenu />
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           className="icon-dots-vertical w-8 h-8 mt-2 mr-2"
@@ -91,7 +93,7 @@ export default function ChatBox(props){
             fillRule="evenodd"
             d="M12 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
           />
-        </svg>
+        </svg> */}
       </div>
       <MessagesContainer 
      
