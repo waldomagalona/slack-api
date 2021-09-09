@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { set } from "react-hook-form";
+import ChannelDetailsModal from "./ChannelDetailsModal";
 
-export default function DropdownMenu(){
+export default function DropdownMenu(props){
+    // console.log(props.receiveData)
+    const receiveData= props.receiveData
     const [option, setOption]= useState(false)
     const display = (option===true)?"absolute":"hidden"
     function toggleOption(){
         setOption(!option);
     }
+    // console.log(receiveData)
 return(
     <div className="relative">
     <div onClick={toggleOption}>
@@ -23,17 +27,12 @@ return(
         </svg>
 </div>
    
-    <div className={`${display} right-0 w-48 py-2 mt-2 bg-white bg-gray-100 rounded-md shadow-xl`}>
-        <a href="#" className="block px-4 py-2 text-sm text-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white">
-            Dropdown List 1
-        </a>
-        <a href="#" className="block px-4 py-2 text-sm text-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white">
-            Dropdown List 2
-        </a>
-        <a href="#" className="block px-4 py-2 text-sm text-gray-300 text-gray-700 hover:bg-gray-400 hover:text-white">
-            Dropdown List 3
-        </a>
-    </div>
+    <ChannelDetailsModal 
+    toggleOption={toggleOption}
+     usersList={props.usersList}
+    headers ={props.headers}
+    receiveData={receiveData}
+    display={display}/>
 </div>
 )
 }
