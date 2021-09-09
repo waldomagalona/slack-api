@@ -58,7 +58,8 @@ export default function ChannelDetailsModal(props) {
             return user.id === mId
         })
     })
-    console.log("mem",channelMembers)
+    const members = [].concat.apply([], channelMembers)
+    console.log("mem",members)
     return (
         <>
            
@@ -75,11 +76,11 @@ export default function ChannelDetailsModal(props) {
                    {channelDetails.channelName}
                 </ModalHeader>
                 <ModalBody>
-                   {channelMembers.map(member=>{
-                       return <div>{member.map(mem=>{
-                           return mem.email
-                       })}</div>
-                   })}
+                <p className="text-green-900">MEMBERS</p>
+                  {members.map(member=>{
+                      const {email}=member
+                      return <p className="text-green-900">{email}</p>
+                  })}
                 </ModalBody>
                 <ModalFooter>
                     <Button 
