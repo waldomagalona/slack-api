@@ -21,7 +21,7 @@ const schema=yup.object().shape({
 export default function LogInForm(props){
 	const [showModal, setShowModal] =useState(false);
 	const [notif, setNotif]= useState([])
-    const {register, handleSubmit, formState:{errors}}= useForm({
+    const {register, handleSubmit, reset, formState:{errors}}= useForm({
         resolver: yupResolver(schema),
     });
 
@@ -38,6 +38,7 @@ const submitForm = (data) =>{
 		console.log(error.response.data)
 		setShowModal(true);
 		setNotif(error.response.data.errors)
+		reset({password:""})
 	})
 
 };

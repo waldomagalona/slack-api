@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import ChatBox from './chat/ChatBox';
 import Sidebar from './SideBar';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import WelcomeMessage from './navigation/WelcomeMessage';
 import DirectMessages from './navigation/DirectMessages';
 import Channels from './navigation/Channels';

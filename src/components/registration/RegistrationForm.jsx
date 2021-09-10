@@ -22,7 +22,7 @@ const schema=yup.object().shape({
 export default function RegistrationForm(props){
 	const [showModal, setShowModal] =useState(false);
 	const [notif, setNotif]= useState([])
-    const {register, handleSubmit, formState:{errors}}= useForm({
+    const {register, handleSubmit, reset, formState:{errors}}= useForm({
         resolver: yupResolver(schema),
     });
 const submitForm =(data) =>{
@@ -34,8 +34,14 @@ const submitForm =(data) =>{
 	.catch((error)=>{
 		console.log(error.response.data.errors['full_messages'])
 		setNotif(error.response.data.errors['full_messages'])
+	
 	})
 	setShowModal(true);
+	reset({
+		email:"",
+		password:"",
+		password_confirmation:""
+	})
 };
     return (
         <div id ="registration" className="h-screen font-mono bg-gray-400">
