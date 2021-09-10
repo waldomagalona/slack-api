@@ -119,6 +119,7 @@ const retrieveInvitedChannels =()=> {
         </div>
         <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1599992836360-f88e279f8350?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMHdvb2QlMjB0ZXh0dXJlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80')`}}>
             <ChatBox 
+             usersList={usersList}
             receiverData ={receiverData}
             headers={props.headers}/>
         </div>

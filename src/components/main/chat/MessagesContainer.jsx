@@ -7,7 +7,7 @@ export default function MessagesContainer(props){
     const data =props.data
     const headers= props.headers
     const [messages, setMessages]=useState([])
-  
+    const count = props.counter;
   
 
     const hydrate=()=>{
@@ -32,9 +32,9 @@ export default function MessagesContainer(props){
           headers: headers
         })
         .then(response=>{
-         if((response.data.data.length) !== (messages && messages.length)){
+        
           setMessages(response.data.data)
-         }
+         
           
         })
         .catch(error=>{
@@ -42,16 +42,16 @@ export default function MessagesContainer(props){
         })
         }
 
-    useEffect(()=>{
-     hydrate()
-    },[])
     
 
     useEffect(()=>{
       retrieveMessages()
      
-    })
+    },[data])
 
+    useEffect(()=>{
+      hydrate()
+     },[count])
     return(
         <MapMessage 
         data={data}

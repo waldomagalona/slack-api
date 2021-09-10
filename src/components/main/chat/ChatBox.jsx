@@ -4,12 +4,13 @@ import MessagesContainer from './MessagesContainer';
 import SenderChatBubble from './SenderChatBubble';
 import { useForm } from 'react-hook-form';
 import ChatTextInput from './ChatTextInput';
+import DropdownMenu from '../../tools/DropdownMenu';
 
 export default function ChatBox(props){
   
 
   const headers=props.headers;
- 
+  const [counter, setCounter]=useState(1)
   const [receiveBody, setReceiveBody] =useState({body:""})
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
@@ -50,6 +51,7 @@ export default function ChatBox(props){
       })
       .then(response=>{
         console.log(response)
+        setCounter(counter + 1)
         
       })
       .catch(error=>{
@@ -81,7 +83,11 @@ export default function ChatBox(props){
         </router-link>
         <div className="my-3 text-gray-200 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
-        <svg
+        <DropdownMenu 
+         usersList={props.usersList}
+        headers ={headers}
+        receiveData={receiveData} />
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           className="icon-dots-vertical w-8 h-8 mt-2 mr-2"
@@ -91,10 +97,10 @@ export default function ChatBox(props){
             fillRule="evenodd"
             d="M12 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
           />
-        </svg>
+        </svg> */}
       </div>
       <MessagesContainer 
-     
+     counter={counter}
       data={data}
       headers={headers}
       />
