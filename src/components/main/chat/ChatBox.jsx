@@ -30,7 +30,7 @@ export default function ChatBox(props){
         })
       }
      
-    },[])  
+    },[receivedId])  
   
 
     function handleChange(event){
@@ -63,7 +63,7 @@ export default function ChatBox(props){
         <div >
     <div className="h-screen" style={{overscrollBehavior: "none"}}>
       <div
-        className="fixed w-1/2 bg-gray-900 h-16 pt-2 text-white flex justify-between shadow-md"
+        className="fixed w-1/2 bg-gray-700 h-16 pt-2 text-white flex justify-between shadow-md"
         style={{top:"0px", overscrolBehavior: "none"}}
       >
         {/* <!-- back button --> */}
@@ -71,15 +71,15 @@ export default function ChatBox(props){
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="w-12 h-12 my-1 text-green-100 ml-2"
+            className="w-12 h-12 my-1 text-gray-200 ml-2"
           >
             <path
-              className="text-green-100 fill-current"
+              className="text-gray-200 fill-current"
               d="M9.41 11H17a1 1 0 0 1 0 2H9.41l2.3 2.3a1 1 0 1 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.42 1.4L9.4 11z"
             />
           </svg>
         </router-link>
-        <div className="my-3 text-green-100 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
+        <div className="my-3 text-gray-200 font-bold text-lg tracking-wide">{data?data['receiver_email']:""}</div>
         {/* <!-- 3 dots --> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ export default function ChatBox(props){
           className="icon-dots-vertical w-8 h-8 mt-2 mr-2"
         >
           <path
-            className="text-green-100 fill-current"
+            className="text-gray-200 fill-current"
             fillRule="evenodd"
             d="M12 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
           />

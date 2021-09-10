@@ -25,7 +25,7 @@ export default function Channels(props){
 
     return(
         <div>
-        <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">Channels</span> <br /> here</p>
+        <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-gray-200">Channels</span> <br /> here</p>
         <AddChannel headers = {props.headers} usersList={props.usersList}/>
         <br></br>
         {(props.channelList)?(<ChannelListContainer

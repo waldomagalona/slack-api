@@ -88,7 +88,7 @@ const retrieveInvitedChannels =()=> {
         
 <div>
     <div className='overflow-hidden h-screen flex'>
-        <div className='flex w-1/2  bg-gradient-to-r from-yellow-100'>
+        <div className='flex w-1/2  bg-gradient-to-br from-gray-600 to-gray-300'>
         <Router>
         <Sidebar logOut={props.logOut} />
 
@@ -102,7 +102,8 @@ const retrieveInvitedChannels =()=> {
                     headers={props.headers} />
                 </Route>
                 <Route path ="/directmessages" >
-                    <DirectMessages />
+                    <DirectMessages 
+                    />
                 </Route>
                 <Route path ="/channels" >
              
@@ -116,7 +117,7 @@ const retrieveInvitedChannels =()=> {
                 </div>
         </Router>
         </div>
-        <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1541364983171-a8ba01e95cfc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80')`}}>
+        <div className="w-1/2 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1599992836360-f88e279f8350?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMHdvb2QlMjB0ZXh0dXJlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80')`}}>
             <ChatBox 
             receiverData ={receiverData}
             headers={props.headers}/>

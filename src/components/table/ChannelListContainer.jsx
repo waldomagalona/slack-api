@@ -15,7 +15,7 @@ export default function ChannelListContainer(props){
               searchHandler ={props.searchHandler} />
             </div>
             {/* <!-- end header --> */}
-        <div className="overflow-scroll overflow-x-hidden h-64">
+        <div className="overflow-scroll overflow-x-hidden h-96">
         {(channelList.length>0)?(channelList.map(channel => {
              return <ChannelCards
               passReceiverDetails={props.passReceiverDetails}

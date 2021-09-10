@@ -27,7 +27,7 @@ export default function WelcomeMessage(props){
 
    
     return(<div>
-        <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-yellow-400">we're</span> <br /> chatting<br /> soon</p>
+        <p className='mb-5 text-5xl uppercase tracking-widest'> <span className="text-gray-200">we're</span> <br /> chatting<br /> soon</p>
         <ListContainer
         passReceiverDetails={props.passReceiverDetails} 
         getTerm={getTerm}

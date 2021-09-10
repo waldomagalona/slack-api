@@ -11,7 +11,7 @@ export default function Sidebar(props){
         // <!-- This is an example component -->
 <div>
   {/* <!-- Sidebar --> */}
-      <nav className="h-screen bg-gray-900 w-20  justify-between flex flex-col ">
+      <nav className="h-screen bg-gray-800 w-20  justify-between flex flex-col ">
         <div className="mt-10 mb-10">
           <a href="#">
             <img

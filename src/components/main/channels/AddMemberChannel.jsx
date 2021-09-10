@@ -63,7 +63,7 @@ const AddMemberChannel = (props) => {
         <div>
             <button onClick={() => setShowModal(true)} className="flex items-center px-2 py-1 text-xs text-white bg-green-400 hover:bg-green-600">
                         
-                        <span className="">+ Add Member</span>
+                        <span className="">(+) Add Member</span>
             </button>
             {showModal ? (
         <>
