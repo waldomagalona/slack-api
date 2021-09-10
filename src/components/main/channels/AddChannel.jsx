@@ -92,7 +92,7 @@ const AddChannel = (props) => {
                   </button>
                 </div>
                 {/*body*/}
-                <form onSubmit={() => handleSubmit(addChannelHander)}> 
+                <form onSubmit={handleSubmit(addChannelHander)}> 
                 <div className="relative p-6 flex-auto">
                   <label>
                       Channel Name:
