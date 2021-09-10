@@ -42,16 +42,16 @@ export default function MessagesContainer(props){
         })
         }
 
-    useEffect(()=>{
-     hydrate()
-    },[count])
     
 
     useEffect(()=>{
       retrieveMessages()
      
-    },[])
+    },[data])
 
+    useEffect(()=>{
+      hydrate()
+     },[count])
     return(
         <MapMessage 
         data={data}
