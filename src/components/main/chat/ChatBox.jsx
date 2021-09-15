@@ -1,17 +1,19 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef} from 'react';
 import MessagesContainer from './MessagesContainer';
-import SenderChatBubble from './SenderChatBubble';
 import { useForm } from 'react-hook-form';
-import ChatTextInput from './ChatTextInput';
 import DropdownMenu from '../../tools/DropdownMenu';
 
 export default function ChatBox(props){
-  
+  const {register, handleSubmit, reset, setValue}= useForm({defaultValues:{
+            receiver_id: "",
+            receiver_class: "",
+            receiver_email: "",
+            body:""
+  }});
 
   const headers=props.headers;
   const [counter, setCounter]=useState(1)
-  const [receiveBody, setReceiveBody] =useState({body:""})
   const receiverData = localStorage.getItem("receiver");
   const receiveData =JSON.parse(receiverData)
   const [data, setData]= useState({body:""})
@@ -87,17 +89,7 @@ export default function ChatBox(props){
          usersList={props.usersList}
         headers ={headers}
         receiveData={receiveData} />
-        {/* <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          className="icon-dots-vertical w-8 h-8 mt-2 mr-2"
-        >
-          <path
-            className="text-gray-200 fill-current"
-            fillRule="evenodd"
-            d="M12 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-          />
-        </svg> */}
+        
       </div>
       <MessagesContainer 
      counter={counter}
@@ -108,12 +100,12 @@ export default function ChatBox(props){
     </div>
 
     <form 
+    onSubmit={handleSubmit(handleClick)}
      className="fixed w-1/2 flex justify-between bg-gray-900" style={{bottom: "0px"}}>
 
      {/* chat text input area start*/}
      <textarea
-        onChange={handleChange}
-        value={data.body}
+         {...register("body")} 
         name="body"
         className="flex-grow m-2 py-2 px-4 mr-1 rounded-full border border-gray-300 bg-gray-200 resize-none"
         rows="1"
