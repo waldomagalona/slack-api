@@ -46,7 +46,7 @@ export default function ChatBox(props){
     function handleClick(event){
       event.preventDefault();
       console.log("handleclick", data)
-      axios.post("http://206.189.91.54/api/v1/messages",data, {
+      axios.post("https://slackapi.avionschool.com/api/v1/messages",data, {
         headers: headers
       })
       .then(response=>{

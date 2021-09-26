@@ -13,7 +13,7 @@ export default function MessagesContainer(props){
     const hydrate=()=>{
       axios({
         method: 'get',
-        url:`http://206.189.91.54/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
+        url:`https://slackapi.avionschool.com/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
         data: data,
         headers: headers
       })
@@ -27,7 +27,7 @@ export default function MessagesContainer(props){
     const retrieveMessages =()=>{
         axios({
           method: 'get',
-          url:`http://206.189.91.54/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
+          url:`https://slackapi.avionschool.com/api/v1/messages?receiver_id=${data?data["receiver_id"]:""}&receiver_class=${data?data["receiver_class"]:""}`,
           data: data,
           headers: headers
         })

@@ -24,7 +24,7 @@ const AddMemberChannel = (props) => {
     const addChannelHander = () => {
           axios({
             method: 'post',
-            url: 'http://206.189.91.54/api/v1/channel/add_member',
+            url: 'https://slackapi.avionschool.com/v1/channel/add_member',
             data: {
               'id': props.id, 
               'member_id': newMember

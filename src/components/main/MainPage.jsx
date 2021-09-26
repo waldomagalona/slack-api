@@ -16,7 +16,7 @@ export default function MainPage(props){
     const hydrate =()=> {
         axios({
             method:'get',
-            url:'http://206.189.91.54/api/v1/channels',
+            url:'https://slackapi.avionschool.com/api/v1/channels',
             headers: headers
         })
         .then(response =>{
@@ -36,7 +36,7 @@ export default function MainPage(props){
 const retrieveInvitedChannels =()=> {
     axios({
         method:'get',
-        url:'http://206.189.91.54/api/v1/channels',
+        url:'https://slackapi.avionschool.com/api/v1/channels',
         headers: headers
     })
     .then(response =>{
@@ -55,7 +55,7 @@ const retrieveInvitedChannels =()=> {
     const getUsersList =()=>{
         axios({
             method:'get',
-            url:'http://206.189.91.54/api/v1/users',
+            url:'https://slackapi.avionschool.com/api/v1/users',
             headers: headers
         })
         .then(response => {

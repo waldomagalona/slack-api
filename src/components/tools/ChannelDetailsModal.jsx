@@ -29,7 +29,7 @@ export default function ChannelDetailsModal(props) {
 
         axios({
             method:'get',
-            url:`http://206.189.91.54/api/v1/channels/${channelId}`,
+            url:`https://slackapi.avionschool.com/api/v1/channels/${channelId}`,
             headers: headers
         })
         .then(response=>{

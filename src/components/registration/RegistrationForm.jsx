@@ -26,7 +26,7 @@ export default function RegistrationForm(props){
         resolver: yupResolver(schema),
     });
 const submitForm =(data) =>{
-    axios.post("http://206.189.91.54/api/v1/auth/",data)
+    axios.post("https://slackapi.avionschool.com/api/v1/auth/",data)
     .then((response)=>{
         console.log(response)
 		setNotif(["Successfully Created Account. Go to Log In Page"])

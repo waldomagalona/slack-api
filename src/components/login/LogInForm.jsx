@@ -28,7 +28,7 @@ export default function LogInForm(props){
 
 const submitForm = (data) =>{
 	console.log('submit ran');
-    axios.post("http://206.189.91.54/api/v1/auth/sign_in/",data)
+    axios.post("https://slackapi.avionschool.com/api/v1/auth/sign_in/",data)
     .then((response)=>{
 		console.log(response)
 		props.saveUser(response)

@@ -26,7 +26,7 @@ const AddChannel = (props) => {
           userIdNumbers = [].concat.apply([],addedId);
           axios({
             method: 'post',
-            url: 'http://206.189.91.54//api/v1/channels',
+            url: 'https://slackapi.avionschool.com/api/v1/channels',
             data: {
               'name': data.name, 
               'user_ids': userIdNumbers},
