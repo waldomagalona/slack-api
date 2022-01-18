@@ -5,12 +5,6 @@ import { useForm } from 'react-hook-form';
 import DropdownMenu from '../../tools/DropdownMenu';
 
 export default function ChatBox(props){
-  const {register, handleSubmit, reset, setValue}= useForm({defaultValues:{
-            receiver_id: "",
-            receiver_class: "",
-            receiver_email: "",
-            body:""
-  }});
 
   const headers=props.headers;
   const [counter, setCounter]=useState(1)
@@ -18,22 +12,17 @@ export default function ChatBox(props){
   const receiveData =JSON.parse(receiverData)
   const [data, setData]= useState({body:""})
   
+  const {register, handleSubmit, reset, setValue}= useForm({defaultValues:{
+            receiver_id: "",
+            receiver_class: "",
+            receiver_email: "",
+            body:""
+  }});
+
+ 
     
    const receivedId =receiveData?receiveData['receiver_id']:""
-    useEffect(()=>{
-      
-      if(receiveData){
-        console.log("useEffect in chatbox ran")
-        const {receiver_id, receiver_class, receiver_email }=receiveData;
-        setData(prevValue=>{
-          return {...prevValue,  
-            receiver_id: receiver_id,
-            receiver_class: receiver_class,
-            receiver_email: receiver_email}
-        })
-      }
-     
-    },[receivedId])  
+    //    
   
 
     function handleChange(event){
